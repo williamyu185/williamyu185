@@ -1,0 +1,97 @@
+# git operate  
+testBranch="test_20170420"
+currentGitBranch() {
+	# 获取git当前分支
+    	branch=''
+    	cd $PWD
+    	if [ -d '.git' ]; then
+        	output=`git symbolic-ref --short -q HEAD`
+        	if [ "$output" ]; then
+            		branch="${output}"
+        	fi
+    	fi
+	echo "$branch"
+}
+allBranch() {
+	local allBranchName=`git branch`
+	echo "$allBranchName"
+}
+pullOtherBranch() {
+	git pull origin $1
+}
+checkoutToTestAndPull() {
+	git checkout $testBranch
+	git pull origin $testBranch
+}
+checkoutToMasterAndPull() {
+	git checkout master
+	git pull origin master
+}
+checkoutToOtherAndPull() {
+	checkoutBranch $1
+	pullCurrentBranch
+}
+pullCurrentBranch() {
+	currentGitBranch
+	git pull origin $branch
+}
+checkoutBranch() {
+	if [ ! -n "$1" ]; then
+		echo "enter branch name"
+		return
+	fi
+	git checkout $1
+}
+commitAndPush() {
+	if [ ! -n "$1" ]; then
+		echo "commit message must be writed"
+		return
+	fi
+	currentGitBranch
+	git add .
+	git commit -m "$1"
+	git pull origin $branch
+	git push origin $branch
+}
+pushTestAndCheckoutBranch() {
+	currentGitBranch
+	if [ "$branch" != $testBranch ]; then
+		echo `current branch must be ${testBranch}`
+		return
+	fi
+	if [ ! -n "$1" ]; then
+		echo "enter branch name"
+		return
+	fi
+	git pull origin $testBranch
+	git push origin $testBranch
+	git checkout $1
+}
+creatLocalAndRemoteBranch() {
+	if [ ! -n "$1" ]; then
+		echo "enter branch name"
+		return
+	fi
+	currentGitBranch
+	if [ "$branch" != "master" ]; then
+		echo "current branch must be master"
+		return
+	fi
+	git checkout -b $1
+	git push --set-upstream origin $1
+}
+delLocalAndRemoteBranch() {
+	if [ ! -n "$1" ]; then
+		echo "enter branch name"
+		return
+	fi
+	git branch -D $1
+	git push origin -d $1
+}
+containCommitIdBranchs() {
+	if [ ! -n "$1" ]; then
+		echo "enter commit id"
+		return
+	fi
+	git branch -a --contains $1
+}
