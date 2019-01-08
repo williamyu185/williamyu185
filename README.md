@@ -17,7 +17,7 @@
     	<br />
     1.安装iterm2.实用命令行模式: brew cask install iterm2 或 到官网https://www.iterm2.com/downloads.html下载.<br />
     <br />
-    2.vim ~/.zshrc,将以下代码粘贴到文件中<br />
+    2.vim ~/.zshrc,将shell.txt中的代码粘贴到文件中,保存并退出.以下为shell.txt中的代码.<br />
     <br />
     # git operate<br />
     testBranch="test_20170420"<br />
@@ -393,7 +393,7 @@
     </blockquote>
     <p>
     	<br />
-    5.共同学习,一起进步.有错漏地方在所难免,敬请指出.希望本文对你有所帮助<br />
+    5.共同学习,一起进步.错漏处在所难免,敬请谅解.希望本文对你有所帮助<br />
     </p>
 </body>
 </html>
