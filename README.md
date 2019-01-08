@@ -15,7 +15,7 @@
     </p>
     <p>
     	<br />
-    1.安装iterm2.实用命令行模式: brew cask install iterm2 或 到官网https://www.iterm2.com/downloads.html下载.<br />
+    1.安装iterm2.实用命令行模式: brew cask install iterm2 或 到官网  https://www.iterm2.com/downloads.html  下载.<br />
     <br />
     2.vim ~/.zshrc,将shell.txt中的代码粘贴到.zshrc文件中,保存并退出.以下为shell.txt中的源码展示.<br />
     <br />
