@@ -4,7 +4,6 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="referrer" content="origin" />
-<title>在iterm2终端下,使用shell封装几个实用git项目管理指令</title>
 </head>
 <body>
     <p>
