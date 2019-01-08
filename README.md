@@ -15,7 +15,7 @@
     </p>
     <p>
     	<br />
-    1.安装iterm2.实用命令行模式: brew cask install iterm2 或 到官网  https://www.iterm2.com/downloads.html  下载.<br />
+    1.安装iterm2.命令行模式: brew cask install iterm2 或 到官网  https://www.iterm2.com/downloads.html  下载.<br />
     <br />
     2.vim ~/.zshrc,将shell.txt中的代码粘贴到.zshrc文件中,保存并退出.以下为shell.txt中的源码展示.<br />
     <br />
@@ -347,7 +347,7 @@
     <br />
     在实际开发中,将正在开发分支代码合并到测试分支应该是最常进行的操作.笔者专门针对测试环境封装了几个常用指令.上面的test_20170420为笔者所在部门所使用测试环境分支名,用户可自行替换成自己所在开发环境的测试分支名<br />
     <br />
-    3.终端下执行source ~/.zshrc &nbsp;使粘入的代码生效,执行chmod 777 ~/.zshrc 确保脚本有读写执行权限.重启iterm2就可使用啦<br />
+    3.终端下执行 &nbsp;&nbsp; source ~/.zshrc &nbsp;使粘入的代码生效.执行&nbsp;&nbsp;chmod 777 ~/.zshrc 确保脚本有读写执行权限.重启iterm2就可使用啦<br />
     <br />
     4.指令文档说明
     </p>
@@ -358,7 +358,7 @@
     </blockquote>
     <blockquote>
     	<p>
-    		2)pullOtherBranch &lt;branchName&gt; &nbsp;拉取远程其他分支代码并合并到当前分支.示例:pullOtherBranch test_20170420
+    		2)pullOtherBranch &lt;branchName&gt; &nbsp;拉取远程其他分支代码合并到当前分支.示例:pullOtherBranch test_20170420
     	</p>
     	<p>
     		3)checkoutToTestAndPull &nbsp;自行从当前分支切换到测试分支,并拉取远程测试分支代码.
@@ -379,7 +379,7 @@
     		8)commitAndPush &lt;commitMsg:String&gt; 提交本地代码到当前分支的本地仓库,并推送到当前分支的远程仓库.示例:commitAndPush "commitMsg"
     	</p>
     	<p>
-    		9)pushTestAndCheckoutBranch &lt;branchName&gt; &nbsp;将其他分支合并到测试分支后,使用该指令,可自行将合并后的代码推送到远程测试分支,并切换到指定指定分支.注:为避免推送错分支,该指令只能在测试分支下使用,在其他分支使用该指令无效.示例:pushTestAndCheckoutBranch otherBranchName
+    		9)pushTestAndCheckoutBranch &lt;branchName&gt; &nbsp;需在其他分支合并到测试分支后使用该指令.该指令将合并后的代码推送到远程测试分支,并切换到指定分支.注:为避免推送错分支,该指令只能在测试分支下使用,在其他分支使用该指令无效.示例:pushTestAndCheckoutBranch otherBranchName
     	</p>
     	<p>
     		10)creatLocalAndRemoteBranch &lt;branchName&gt; 创建一个新的本地和远程分支.注:由于本地创建的新分支是当前分支的一个镜像,为保证新分支代码本地master分支的一致,该指令只能在master分支下使用.示例:creatLocalAndRemoteBranch newBranchName
@@ -388,7 +388,7 @@
     		11)delLocalAndRemoteBranch &lt;branchName&gt; &nbsp;删除本地分支和远程分支.示例:delLocalAndRemoteBranch delBranchName
     	</p>
     	<p>
-    		12)containCommitIdBranchs &lt;commitId&gt; &nbsp;笔者所在部门分支由测试人员负责上线,有时本地积累了大量分支,由于不确定分支是否上线,在删除本地和远程分支是难免有很多忧虑,使用该指令可解决这个问题.切换到想要删除的分支,git log查看日志,查找到最新一次提交的commitId并复制,使用checkoutToMasterAndPull指令切换会主分支,粘入复制的commitId,通过containCommitIdBranchs 06b04c182af87d8464b27cf54cc1ccb4e7e2b2c3查看打印结果,如果打印结果中,该commitId出现在master分支中,说明分支代码已上线,可放心删除.示例:containCommitIdBranchs 06b04c182af87d8464b27cf54cc1ccb4e7e2b2c3
+    		12)containCommitIdBranchs &lt;commitId&gt; &nbsp;笔者所在部门分支由测试人员负责上线,有时本地积累了大量分支,由于不确定分支是否已经上线,在删除本地和远程分支是难免有很多顾虑.使用该指令可解决这个问题.切换到想要删除的分支,git log查看日志,查找到最新一次提交的commitId并复制,通过containCommitIdBranchs <commitId>查看打印结果,如果打印结果中,该commitId出现在master分支中,说明分支代码已上线,可放心删除.注:使用该指令前先切换到master分支并拉取最新的master分支远程代码.示例:containCommitIdBranchs 06b04c182af87d8464b27cf54cc1ccb4e7e2b2c3
     	</p>
     </blockquote>
     <p>
