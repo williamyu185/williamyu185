@@ -19,7 +19,7 @@
     <br />
     2.vim ~/.zshrc,将shell.txt中的代码粘贴到.zshrc文件中,保存并退出.以下为shell.txt中的源码展示.<br />
     <br />
-    # git batch operate&nbsp; &nbsp; &nbsp; by dingyu<br />
+    # git operate&nbsp; &nbsp; &nbsp;<br />
     testBranch="test_20170420"<br />
     currentGitBranch() {<br />
     <span> </span># 获取git当前分支<br />
