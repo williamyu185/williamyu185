@@ -19,331 +19,71 @@
     <br />
     2.vim ~/.zshrc,将shell.txt中的代码粘贴到.zshrc文件中,保存并退出.以下为shell.txt中的源码展示.<br />
     <br />
-    # git operate<br />
-    testBranch="test_20170420"<br />
-    currentGitBranch() {<br />
-    # 获取git当前分支<br />
-    &nbsp; &nbsp; 	branch=''<br />
-    &nbsp; &nbsp; 	cd $PWD<br />
-    &nbsp; &nbsp; 	if [ -d '.git' ]; then<br />
-    &nbsp; &nbsp; &nbsp; &nbsp; 	output=`git symbolic-ref --short -q HEAD`<br />
-    &nbsp; &nbsp; &nbsp; &nbsp; 	if [ "$output" ]; then<br />
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 		branch="${output}"<br />
-    &nbsp; &nbsp; &nbsp; &nbsp; 	fi<br />
-    &nbsp; &nbsp; 	fi<br />
-    echo "$branch"<br />
+    <p>
+    	#git operate <br /> testBranch = "test_20170420"currentGitBranch() {#获取git当前分支branch = ''cd $PWD<br />
+    &nbsp; &nbsp; if [ - d '.git'];<br />
+    &nbsp; &nbsp; then output = `git symbolic - ref--short - q HEAD`<br />
+    &nbsp; &nbsp; if ["$output"];<br />
+    &nbsp; &nbsp; then branch = "${output}"fi fi echo "$branch"<br />
     }<br />
-    allBranch() {
+    allBranch() {<br />
+    &nbsp; &nbsp; local allBranchName = `git branch`echo "$allBranchName"<br />
+    }<br />
+    pullOtherBranch() {<br />
+    &nbsp; &nbsp; git pull origin $1<br />
+    }<br />
+    checkoutToTestAndPull() {<br />
+    &nbsp; &nbsp; checkoutBranch $testBranch pullCurrentBranch<br />
+    }<br />
+    checkoutToMasterAndPull() {<br />
+    &nbsp; &nbsp; checkoutToOtherAndPull master<br />
+    }<br />
+    checkoutToOtherAndPull() {<br />
+    &nbsp; &nbsp; checkoutBranch $1 pullCurrentBranch<br />
+    }<br />
+    pullCurrentBranch() {<br />
+    &nbsp; &nbsp; currentGitBranch pullOtherBranch $branch<br />
+    }<br />
+    checkoutBranch() {<br />
+    &nbsp; &nbsp; if [!-n "$1"];<br />
+    &nbsp; &nbsp; then echo "enter branch name"<br />
+    &nbsp; &nbsp; return fi git checkout $1<br />
+    }<br />
+    commitAndPush() {<br />
+    &nbsp; &nbsp; if [!-n "$1"];<br />
+    &nbsp; &nbsp; then echo "commit message must be writed"<br />
+    &nbsp; &nbsp; return fi currentGitBranch git add.git commit - m "$1"pullCurrentBranch git push origin $branch<br />
+    }<br />
+    pushTestAndCheckoutBranch() {<br />
+    &nbsp; &nbsp; currentGitBranch<br />
+    &nbsp; &nbsp; if ["$branch" != $testBranch];<br />
+    &nbsp; &nbsp; then echo`current branch must be $ {<br />
+    &nbsp; &nbsp; &nbsp; &nbsp; testBranch<br />
+    &nbsp; &nbsp; }`<br />
+    &nbsp; &nbsp; return fi<br />
+    &nbsp; &nbsp; if [!-n "$1"];<br />
+    &nbsp; &nbsp; then echo "enter branch name"<br />
+    &nbsp; &nbsp; return fi pullCurrentBranch git push origin $testBranch checkoutBranch $1<br />
+    }<br />
+    creatLocalAndRemoteBranch() {<br />
+    &nbsp; &nbsp; if [!-n "$1"];<br />
+    &nbsp; &nbsp; then echo "enter branch name"<br />
+    &nbsp; &nbsp; return fi currentGitBranch<br />
+    &nbsp; &nbsp; if ["$branch" != "master"];<br />
+    &nbsp; &nbsp; then echo "current branch must be master"<br />
+    &nbsp; &nbsp; return fi git checkout - b $1 git push--set - upstream origin $1<br />
+    }<br />
+    delLocalAndRemoteBranch() {<br />
+    &nbsp; &nbsp; if [!-n "$1"];<br />
+    &nbsp; &nbsp; then echo "enter branch name"<br />
+    &nbsp; &nbsp; return fi git branch - D $1 git push origin - d $1<br />
+    }<br />
+    containCommitIdBranchs() {<br />
+    &nbsp; &nbsp; if [!-n "$1"];<br />
+    &nbsp; &nbsp; then echo "enter commit id"<br />
+    &nbsp; &nbsp; return fi git branch - a--contains $1<br />
+    }<br />
     </p>
-    <blockquote>
-    	<p>
-    		local allBranchName=`git branch`
-    	</p>
-    	<p>
-    		echo "$allBranchName"
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    pullOtherBranch() {
-    </p>
-    <blockquote>
-    	<p>
-    		git pull origin $1
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    checkoutToTestAndPull() {
-    </p>
-    <blockquote>
-    	<p>
-    		git checkout $testBranch
-    	</p>
-    	<p>
-    		git pull origin $testBranch
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    checkoutToMasterAndPull() {
-    </p>
-    <blockquote>
-    	<p>
-    		git checkout master
-    	</p>
-    	<p>
-    		git pull origin master
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    checkoutToOtherAndPull() {
-    </p>
-    <blockquote>
-    	<p>
-    		checkoutBranch $1
-    	</p>
-    	<p>
-    		pullCurrentBranch
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    pullCurrentBranch() {
-    </p>
-    <blockquote>
-    	<p>
-    		currentGitBranch
-    	</p>
-    	<p>
-    		git pull origin $branch
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    checkoutBranch() {
-    </p>
-    <blockquote>
-    	<p>
-    		if [ ! -n "$1" ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo "enter branch name"
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		return
-    	</p>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		git checkout $1
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    commitAndPush() {
-    </p>
-    <blockquote>
-    	<p>
-    		if [ ! -n "$1" ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo "commit message must be writed"
-    		</p>
-    	</blockquote>
-    	<blockquote>
-    		<p>
-    			return
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		currentGitBranch
-    	</p>
-    	<p>
-    		git add .
-    	</p>
-    	<p>
-    		git commit -m "$1"
-    	</p>
-    	<p>
-    		git pull origin $branch
-    	</p>
-    	<p>
-    		git push origin $branch
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    pushTestAndCheckoutBranch() {
-    </p>
-    <blockquote>
-    	<p>
-    		currentGitBranch
-    	</p>
-    	<p>
-    		if [ "$branch" != $testBranch ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo `current branch must be ${testBranch}`
-    		</p>
-    	</blockquote>
-    	<blockquote>
-    		<p>
-    			return
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		if [ ! -n "$1" ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo "enter branch name"
-    		</p>
-    	</blockquote>
-    	<blockquote>
-    		<p>
-    			return
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		git pull origin $testBranch
-    	</p>
-    	<p>
-    		git push origin $testBranch
-    	</p>
-    	<p>
-    		git checkout $1
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    creatLocalAndRemoteBranch() {
-    </p>
-    <blockquote>
-    	<p>
-    		if [ ! -n "$1" ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo "enter branch name"
-    		</p>
-    	</blockquote>
-    	<blockquote>
-    		<p>
-    			return
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		git checkout -b $1
-    	</p>
-    	<p>
-    		git push --set-upstream origin $1
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    delLocalAndRemoteBranch() {
-    </p>
-    <blockquote>
-    	<p>
-    		if [ ! -n "$1" ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo "enter branch name"
-    		</p>
-    	</blockquote>
-    	<blockquote>
-    		<p>
-    			return
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		currentGitBranch
-    	</p>
-    	<p>
-    		if [ "$branch" != "master" ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo "current branch must be master"
-    		</p>
-    	</blockquote>
-    	<blockquote>
-    		<p>
-    			return
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		git branch -D $1
-    	</p>
-    	<p>
-    		git push origin -d $1
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
-    containCommitIdBranchs() {
-    </p>
-    <blockquote>
-    	<p>
-    		if [ ! -n "$1" ]; then
-    	</p>
-    </blockquote>
-    <blockquote>
-    	<blockquote>
-    		<p>
-    			echo "enter commit id"
-    		</p>
-    	</blockquote>
-    	<blockquote>
-    		<p>
-    			return
-    		</p>
-    	</blockquote>
-    </blockquote>
-    <blockquote>
-    	<p>
-    		fi
-    	</p>
-    	<p>
-    		git branch -a --contains $1
-    	</p>
-    </blockquote>
-    <p>
-    	}<br />
     <br />
     在实际开发中,将正在开发分支代码合并到测试分支应该是最常进行的操作.笔者专门针对测试环境封装了几个常用指令.上面的test_20170420为笔者所在部门所使用测试环境分支名,用户可自行替换成自己所在开发环境的测试分支名<br />
     <br />

@@ -1,4 +1,4 @@
-# git operate  
+# git operate
 testBranch="test_20170420"
 currentGitBranch() {
 	# 获取git当前分支
@@ -20,12 +20,11 @@ pullOtherBranch() {
 	git pull origin $1
 }
 checkoutToTestAndPull() {
-	git checkout $testBranch
-	git pull origin $testBranch
+	checkoutBranch $testBranch
+	pullCurrentBranch
 }
 checkoutToMasterAndPull() {
-	git checkout master
-	git pull origin master
+	checkoutToOtherAndPull master
 }
 checkoutToOtherAndPull() {
 	checkoutBranch $1
@@ -33,7 +32,7 @@ checkoutToOtherAndPull() {
 }
 pullCurrentBranch() {
 	currentGitBranch
-	git pull origin $branch
+	pullOtherBranch $branch
 }
 checkoutBranch() {
 	if [ ! -n "$1" ]; then
@@ -50,7 +49,7 @@ commitAndPush() {
 	currentGitBranch
 	git add .
 	git commit -m "$1"
-	git pull origin $branch
+	pullCurrentBranch
 	git push origin $branch
 }
 pushTestAndCheckoutBranch() {
@@ -63,9 +62,9 @@ pushTestAndCheckoutBranch() {
 		echo "enter branch name"
 		return
 	fi
-	git pull origin $testBranch
+	pullCurrentBranch
 	git push origin $testBranch
-	git checkout $1
+	checkoutBranch $1
 }
 creatLocalAndRemoteBranch() {
 	if [ ! -n "$1" ]; then
