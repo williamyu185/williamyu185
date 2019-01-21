@@ -327,7 +327,7 @@
                </p>
                <p>
                        12)containSomeoneAllBranchs &lt;branchName&gt; &nbsp;笔者所在部门分支由测试人员负责上线,有时本地积累了大量分支,由于不确定分支是否上
-        线,在删除本地和远程分支是难免有很多忧虑,使用该指令可解决这个问题.切换到想要删除的分支,,通过containCommitIdBranchs 06b04c182af87d8464b27cf54cc1ccb4e7e2b2c3查看打印结果,如果打印结果中,该branchName出现在master分支中,说明分支代码已上线,可放心删除.示例:containSomeoneAllBranchs branchName
+        线,在删除本地和远程分支是难免有很多忧虑,使用该指令可解决这个问题.切换到想要删除的分支,,通过containSomeoneAllBranchs branchName,如果打印结果中,该branchName出现在master分支中,说明分支代码已上线,可放心删除.示例:containSomeoneAllBranchs branchName
                </p>
             </blockquote>
         <br />
