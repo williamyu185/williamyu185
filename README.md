@@ -197,14 +197,14 @@
     git push origin -d $1
     </blockquote>
     }<br />
-    containCommitIdBranchs() {<br />
+    containSomeoneAllBranchs() {<br />
     <span> </span>
     <blockquote>
     	if [ ! -n "$1" ]; then<br />
     </blockquote>
     <blockquote>
     	<blockquote>
-    		echo "enter commit id"
+    		echo "enter branch name"
     	</blockquote>
     	<blockquote>
     		return
