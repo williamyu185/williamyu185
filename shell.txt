@@ -144,13 +144,16 @@ checkoutBranch() {
 	git checkout $1
 }
 commitAndPush() {
-	if [ ! -n "$1" ]; then
-		echo "commit message must be writed"
-		return
-	fi
 	currentGitBranch
 	git add .
-	git commit -m "$1"
+	local commitDate=`date "+%Y-%m-%d %H:%M:%S"`
+	if [ ! -n "$1" ]; 
+	then
+		echo "Automatically add time as submission information"
+		git commit -m "$commitDate"
+	else
+		git commit -m "$1 $commitDate"
+	fi
 	pullCurrentBranch
 	git push origin $branch
 }
